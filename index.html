@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>FerbrosCREW — Links</title>
+  <meta name="description" content="Your attention span isn’t broken — they’re just boring. We’re not.">
+
+  <!-- Social previews (optional) -->
+  <meta property="og:title" content="FerbrosCREW — Links"/>
+  <meta property="og:description" content="We’re building the garage they don’t teach you about. You in?"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://your-domain/og.jpg"/>
+  <meta property="og:url" content="https://your-domain/"/>
+
+  <link rel="icon" href="assets/favicon.png"/>
+
+  <style>
+    :root{
+      --bg:#000; --panel:#0a0a0a; --text:#f7f7f7; --muted:#9b9b9b; --border:#1c1c1c;
+      --accent:#ffcc00; --ring:rgba(255,204,0,.45);
+      --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.5);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    .wrap{max-width:720px;margin:0 auto;padding:20px 16px 44px}
+
+    /* FULL-BLEED 4:3 HEADER (no rounded corners) */
+    .header-bleed{
+      width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+      background:#111;
+      /* Keep it from being too tall on big monitors */
+      max-height:70vh; /* you can tweak this */
+      overflow:hidden;
+    }
+    .header-media{
+      width:100%; aspect-ratio:4/3; display:block; object-fit:cover;
+      /* If the 70vh cap kicks in, let the video scale to fit height while maintaining 4:3 */
+      height:auto;
+    }
+
+    /* In-app browser hint */
+    .browser-hint{position:sticky;top:0;z-index:50;display:none;background:#0d0d0d;border-bottom:1px solid var(--border)}
+    .hint-inner{display:flex;gap:10px;align-items:center;padding:10px 14px;font-size:14px}
+    .hint-dot{width:24px;height:24px;border-radius:999px;background:#121212;display:grid;place-items:center;border:1px solid var(--border)}
+    .hint-accent{color:var(--accent);font-weight:700}
+    .hint-close{margin-left:auto;background:transparent;border:0;color:var(--text);opacity:.75;cursor:pointer}
+    .hint-close:hover{opacity:1}
+
+    /* Profile card */
+    .card{margin-top:16px;padding:18px;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .head{display:flex;gap:14px;align-items:center}
+    .avatar{width:68px;height:68px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#111}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+
+    /* Brand title style */
+    .title{display:flex;align-items:center;gap:8px;line-height:1}
+    .brand-ferbros{
+      font-weight:900;font-size:22px;color:#000;
+      /* white outline (fallback via multi-shadow to simulate stroke) */
+      text-shadow:
+        -1px -1px 0 #fff, 1px -1px 0 #fff,
+        -1px  1px 0 #fff, 1px  1px 0 #fff;
+      letter-spacing:.2px;
+      background:transparent; padding:0 1px;
+    }
+    .brand-crew{
+      font-weight:900;font-size:22px;color:#000;background:var(--accent);
+      padding:2px 8px;border-radius:1px; letter-spacing:.8px;
+    }
+
+    .subtitle{color:var(--muted);font-size:14px;margin-top:6px}
+
+    /* Links list */
+    .links{margin-top:14px;display:flex;flex-direction:column;gap:12px}
+    .link{
+      display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;
+      padding:14px;background:#0e0e0e;border:1px solid var(--border);border-radius:14px;
+      text-decoration:none;color:var(--text)
+    }
+    .link:hover{border-color:#2a2a2a}
+    .logo{width:44px;height:44px;border-radius:10px;background:#111;border:1px solid var(--border);display:block;object-fit:contain;padding:6px}
+    .link-label{font-weight:800;letter-spacing:.2px}
+    .chip{padding:6px 8px;border-radius:999px;font-size:12px;font-weight:900;color:#111;background:var(--accent);text-transform:uppercase}
+
+    /* Discord unified block */
+    .block{display:flex;flex-direction:column;gap:10px;padding:14px;background:#0e0e0e;border:1px solid var(--border);border-radius:14px}
+    .block-head{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center}
+    .group{display:flex;width:100%}
+    .btn{
+      flex:1 1 auto;display:flex;align-items:center;justify-content:center;gap:8px;
+      padding:14px;background:#101010;border:1px solid var(--border);color:var(--text);font-weight:800;cursor:pointer
+    }
+    .btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+    .btn-left{border-top-left-radius:12px;border-bottom-left-radius:12px;background:#1a1a1a;color:#777;cursor:not-allowed}
+    .btn-right{border-top-right-radius:12px;border-bottom-right-radius:12px;background:var(--accent);color:#000;border-color:#caa400;max-width:180px;flex:0 0 auto}
+    .btn-right:hover{filter:brightness(.95)}
+
+    .foot{margin-top:16px;color:var(--muted);font-size:12px;text-align:center}
+
+    @media (max-width:440px){
+      .brand-ferbros,.brand-crew{font-size:20px}
+      .avatar{width:60px;height:60px}
+      .btn-right{max-width:150px}
+    }
+  </style>
+</head>
+<body>
+  <!-- In-app browser hint -->
+  <div class="browser-hint" id="browserHint" role="region" aria-live="polite">
+    <div class="hint-inner">
+      <div class="hint-dot" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+      </div>
+      Do us both a favor — <span class="hint-accent">open in your browser</span> for the full experience. Tap the <b>three dots</b> → <b>Open in browser</b>.
+      <button class="hint-close" id="hintClose" aria-label="Close">Close</button>
+    </div>
+  </div>
+
+  <!-- FULL-BLEED 4:3 HEADER VIDEO -->
+  <section class="header-bleed" aria-label="Header">
+    <video class="header-media" autoplay muted loop playsinline poster="assets/header-poster.jpg">
+      <source src="assets/header.mp4" type="video/mp4"/>
+      <source src="assets/header.webm" type="video/webm"/>
+      <img src="assets/header.gif" alt="FerbrosCREW header"/>
+    </video>
+  </section>
+
+  <main class="wrap">
+    <!-- Profile / tagline -->
+    <section class="card">
+      <div class="head">
+        <div class="avatar"><img src="FERBROSCREW logo (1).png" alt="FerbrosCREW avatar"></div>
+        <div>
+          <div class="title">
+            <span class="brand-ferbros">Ferbros</span><span class="brand-crew">CREW</span>
+          </div>
+          <div class="subtitle">The place where we build the garage they don't teach you about.</div>
+        </div>
+      </div>
+
+      <!-- Links (explicit SRCs) -->
+
+      <div class="links" role="navigation" aria-label="Main links">
+        <a class="link" href="https://2strokeshop.com/aff/37/" target="_blank" rel="noopener noreferrer">
+          <img class="logo" src="2STROKESHOP.COM-512X512-PNG-2.webp" alt="YouTube" loading="lazy">
+          <span class="link-label">Stickers, oil, everything for a 2 stroke rider</span>
+        </a>
+
+
+        <!-- Discord unified block -->
+        <div class="block">
+          <div class="block-head">
+            <img class="logo" src="Discord-Logo.png" alt="Discord" loading="lazy">
+            <span class="link-label">Discord</span>
+            <span class="chip">JOIN</span>
+          </div>
+          <div class="group">
+            <button class="btn btn-left" type="button" aria-disabled="true">Join now</button>
+            <button class="btn btn-right" id="copyDiscord" type="button" data-clip="https://discord.gg/UYXKPbcdNc" aria-label="Copy invite">Copy invite</button>
+          </div>
+        </div>
+
+
+
+      <div class="links" role="navigation" aria-label="Main links">
+        <a class="link" href="https://www.youtube.com/@Ferbrosgarage" target="_blank" rel="noopener noreferrer">
+          <img class="logo" src="Youtubelogo.png" alt="YouTube" loading="lazy">
+          <span class="link-label">YouTube</span>
+          <span class="chip">NEW</span>
+        </a>
+
+        <a class="link" href="https://www.tiktok.com/@ferbrosgarage" target="_blank" rel="noopener noreferrer">
+          <img class="logo" src="TikTok-Logo.png" alt="TikTok" loading="lazy">
+          <span class="link-label">TikTok</span>
+          <span></span>
+        </a>
+
+        <a class="link" href="https://www.instagram.com/ferborsgarage/" target="_blank" rel="noopener noreferrer">
+          <img class="logo" src="Insta logo.png" alt="Instagram" loading="lazy">
+          <span class="link-label">Instagram</span>
+          <span></span>
+        </a>
+
+
+    <p class="foot">© <span id="year"></span> FerbrosCREW</p>
+  </main>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // In-app browser detection → show hint
+    (function(){
+      const ua = navigator.userAgent || navigator.vendor || '';
+      const isTikTok = /\bTikTok\b/i.test(ua);
+      const isIG = /\bInstagram\b/i.test(ua);
+      const isFB = /\bFBAN|FBAV|FB_IAB\b/i.test(ua);
+      const isInApp = isTikTok || isIG || isFB;
+      const hint = document.getElementById('browserHint');
+      const close = document.getElementById('hintClose');
+      if (isInApp) hint.style.display = 'block';
+      close?.addEventListener('click', () => hint.remove());
+    })();
+
+    // Copy Discord invite
+    (function(){
+      const btn = document.getElementById('copyDiscord');
+      if(!btn) return;
+      btn.addEventListener('click', async () => {
+        const url = btn.getAttribute('data-clip');
+        try{
+          await navigator.clipboard.writeText(url);
+          const prev = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(()=> btn.textContent = prev, 1400);
+        }catch(e){
+          alert('Copy failed. Long-press and copy the link instead.');
+        }
+      });
+    })();
+
+    // Optional: UTM propagation
+    (function(){
+      const params = new URLSearchParams(window.location.search);
+      const utm = params.get('utm_source');
+      if(!utm) return;
+      document.querySelectorAll('a[href^="http"]').forEach(a=>{
+        try{
+          const u = new URL(a.href);
+          if(!u.searchParams.get('utm_source')){
+            u.searchParams.set('utm_source', utm);
+            a.href = u.toString();
+          }
+        }catch(e){}
+      });
+    })();
+  </script>
+</body>
+</html>
