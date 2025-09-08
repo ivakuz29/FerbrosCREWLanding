@@ -30,87 +30,63 @@
     }
     .wrap{max-width:720px;margin:0 auto;padding:20px 16px 44px}
 
-    /* FULL-BLEED 4:3 HEADER (no rounded corners) */
+    /* FULL-BLEED 4:3 HEADER (no rounded) */
     .header-bleed{
-      width:100vw;
-      margin-left:calc(50% - 50vw);
-      margin-right:calc(50% - 50vw);
-      background:#111;
-      max-height:70vh; /* tweak if you want shorter on desktop */
-      overflow:hidden;
+      width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+      background:#111; max-height:70vh; overflow:hidden;
     }
-    .header-media{
-      width:100%;
-      aspect-ratio:4/3;
-      display:block;
-      object-fit:cover;
-      height:auto;
-    }
+    .header-media{ width:100%; aspect-ratio:4/3; display:block; object-fit:cover; height:auto; }
 
     /* In-app browser hint */
-    .browser-hint{
-      position:sticky; top:0; z-index:50; display:none;
-      background:#0d0d0d; border-bottom:1px solid var(--border);
-    }
-    .hint-inner{display:flex;gap:10px;align-items:center;padding:10px 14px;font-size:14px}
-    .hint-dot{width:24px;height:24px;border-radius:999px;background:#121212;display:grid;place-items:center;border:1px solid var(--border)}
-    .hint-accent{color:var(--accent);font-weight:700}
-    .hint-close{margin-left:auto;background:transparent;border:0;color:var(--text);opacity:.75;cursor:pointer}
-    .hint-close:hover{opacity:1}
+    .browser-hint{ position:sticky; top:0; z-index:50; display:none; background:#0d0d0d; border-bottom:1px solid var(--border) }
+    .hint-inner{ display:flex; gap:10px; align-items:center; padding:10px 14px; font-size:14px }
+    .hint-dot{ width:24px; height:24px; border-radius:999px; background:#121212; display:grid; place-items:center; border:1px solid var(--border) }
+    .hint-accent{ color:var(--accent); font-weight:700 }
+    .hint-close{ margin-left:auto; background:transparent; border:0; color:var(--text); opacity:.75; cursor:pointer }
+    .hint-close:hover{ opacity:1 }
 
-    /* Profile card */
-    .card{margin-top:16px;padding:18px;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .head{display:flex;gap:14px;align-items:center}
-    .avatar{width:68px;height:68px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#111}
-    .avatar img{width:100%;height:100%;object-fit:cover}
-
-    /* Brand title style */
-    .title{display:flex;align-items:center;gap:8px;line-height:1}
+    /* Card + identity */
+    .card{ margin-top:16px; padding:18px; background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow) }
+    .head{ display:flex; gap:14px; align-items:center }
+    .avatar{ width:68px; height:68px; border-radius:14px; overflow:hidden; border:1px solid var(--border); background:#111 }
+    .avatar img{ width:100%; height:100%; object-fit:cover }
+    .title{ display:flex; align-items:center; gap:8px; line-height:1 }
     .brand-ferbros{
-      font-weight:900;font-size:22px;color:#000;
-      text-shadow:
-        -1px -1px 0 #fff, 1px -1px 0 #fff,
-        -1px  1px 0 #fff, 1px  1px 0 #fff;
-      letter-spacing:.2px;
-      background:transparent; padding:0 1px;
+      font-weight:900; font-size:22px; color:#000;
+      text-shadow:-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+      letter-spacing:.2px; padding:0 1px;
     }
-    .brand-crew{
-      font-weight:900;font-size:22px;color:#000;background:var(--accent);
-      padding:2px 8px;border-radius:8px; letter-spacing:.8px;
-    }
-    .subtitle{color:var(--muted);font-size:14px;margin-top:6px}
+    .brand-crew{ font-weight:900; font-size:22px; color:#000; background:var(--accent); padding:2px 8px; border-radius:8px; letter-spacing:.8px }
+    .subtitle{ color:var(--muted); font-size:14px; margin-top:6px }
 
     /* Links list */
-    .links{margin-top:14px;display:flex;flex-direction:column;gap:12px}
+    .links{ margin-top:14px; display:flex; flex-direction:column; gap:12px }
     .link{
-      display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;
-      padding:14px;background:#0e0e0e;border:1px solid var(--border);border-radius:14px;
-      text-decoration:none;color:var(--text)
+      display:grid; grid-template-columns:44px 1fr auto; align-items:center; gap:12px;
+      padding:14px; background:#0e0e0e; border:1px solid var(--border); border-radius:14px;
+      text-decoration:none; color:var(--text)
     }
-    .link:hover{border-color:#2a2a2a}
-    .logo{width:44px;height:44px;border-radius:10px;background:#111;border:1px solid var(--border);display:block;object-fit:contain;padding:6px}
-    .link-label{font-weight:800;letter-spacing:.2px}
-    .chip{padding:6px 8px;border-radius:999px;font-size:12px;font-weight:900;color:#111;background:var(--accent);text-transform:uppercase}
+    .link:hover{ border-color:#2a2a2a }
+    .logo{ width:44px; height:44px; border-radius:10px; background:#111; border:1px solid var(--border); display:block; object-fit:contain; padding:6px }
+    .link-label{ font-weight:800; letter-spacing:.2px }
+    .chip{ padding:6px 8px; border-radius:999px; font-size:12px; font-weight:900; color:#111; background:var(--accent); text-transform:uppercase }
 
     /* Discord unified block */
-    .block{display:flex;flex-direction:column;gap:10px;padding:14px;background:#0e0e0e;border:1px solid var(--border);border-radius:14px}
-    .block-head{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center}
-    .group{display:flex;width:100%}
-    .btn{
-      flex:1 1 auto;display:flex;align-items:center;justify-content:center;gap:8px;
-      padding:14px;background:#101010;border:1px solid var(--border);color:var(--text);font-weight:800;cursor:pointer
-    }
-    .btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
-    .btn-left{border-top-left-radius:12px;border-bottom-left-radius:12px;background:#1a1a1a;color:#777;cursor:not-allowed}
-    .btn-right{border-top-right-radius:12px;border-bottom-right-radius:12px;background:var(--accent);color:#000;border-color:#caa400;max-width:180px;flex:0 0 auto}
-    .btn-right:hover{filter:brightness(.95)}
+    .block{ display:flex; flex-direction:column; gap:10px; padding:14px; background:#0e0e0e; border:1px solid var(--border); border-radius:14px }
+    .block-head{ display:grid; grid-template-columns:44px 1fr auto; gap:12px; align-items:center }
+    .group{ display:flex; width:100% }
+    .btn{ flex:1 1 auto; display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; background:#101010; border:1px solid var(--border); color:var(--text); font-weight:800; cursor:pointer }
+    .btn:focus-visible{ outline:2px solid var(--ring); outline-offset:2px }
+    .btn-left{ border-top-left-radius:12px; border-bottom-left-radius:12px; background:#1a1a1a; color:#777; cursor:not-allowed }
+    .btn-right{ border-top-right-radius:12px; border-bottom-right-radius:12px; background:var(--accent); color:#000; border-color:#caa400; max-width:180px; flex:0 0 auto }
+    .btn-right:hover{ filter:brightness(.95) }
 
-    .foot{margin-top:16px;color:var(--muted);font-size:12px;text-align:center}
+    .foot{ margin-top:16px; color:var(--muted); font-size:12px; text-align:center }
 
     @media (max-width:440px){
-      .brand-ferbros,.brand-crew{font-size:20px}
-      .avatar{width:60px;height:60px}
-      .btn-right{max-width:150px}
+      .brand-ferbros,.brand-crew{ font-size:20px }
+      .avatar{ width:60px; height:60px }
+      .btn-right{ max-width:150px }
     }
   </style>
 </head>
@@ -143,20 +119,16 @@
       disablepictureinpicture
     >
       <source src="assets/header.mp4" type="video/mp4"/>
-      <source src="assets/header.webm" type="video/webm"/>
-      <!-- Fallback GIF inside video tag for old browsers -->
       <img src="assets/header.gif" alt="FerbrosCREW header"/>
     </video>
-    <noscript>
-      <img src="assets/header.gif" alt="FerbrosCREW header" class="header-media"/>
-    </noscript>
+    <noscript><img src="assets/header.gif" alt="FerbrosCREW header" class="header-media"/></noscript>
   </section>
 
   <main class="wrap">
     <!-- Profile / tagline -->
     <section class="card">
       <div class="head">
-        <div class="avatar"><img src="assets/pfp.png" alt="FerbrosCREW avatar"></div>
+        <div class="avatar"><img id="pfpImg" src="" alt="FerbrosCREW avatar" decoding="async"></div>
         <div>
           <div class="title">
             <span class="brand-ferbros">Ferbros</span><span class="brand-crew">CREW</span>
@@ -168,14 +140,14 @@
       <!-- Links -->
       <div class="links" role="navigation" aria-label="Main links">
         <a class="link" href="https://2strokeshop.com/aff/37/" target="_blank" rel="noopener noreferrer">
-          <img class="logo" src="assets/logos/2strokeshop.webp" alt="2StrokeShop" loading="lazy">
+          <img class="logo logo-auto" data-candidates='["assets/logos/2strokeshop.png","assets/logos/2strokeshop.webp","2STROKESHOP.COM-512X512-PNG-2.webp"]' alt="2StrokeShop" loading="lazy" decoding="async">
           <span class="link-label">Stickers, oil, everything for a 2-stroke rider</span>
         </a>
 
         <!-- Discord unified block -->
         <div class="block">
           <div class="block-head">
-            <img class="logo" src="assets/logos/discord.png" alt="Discord" loading="lazy">
+            <img class="logo logo-auto" data-candidates='["assets/logos/discord.png","assets/logos/discord.svg","Discord-Logo.png"]' alt="Discord" loading="lazy" decoding="async">
             <span class="link-label">Discord</span>
             <span class="chip">JOIN</span>
           </div>
@@ -186,19 +158,19 @@
         </div>
 
         <a class="link" href="https://www.youtube.com/@Ferbrosgarage" target="_blank" rel="noopener noreferrer">
-          <img class="logo" src="assets/logos/youtube.png" alt="YouTube" loading="lazy">
+          <img class="logo logo-auto" data-candidates='["assets/logos/youtube.png","Youtubelogo.png"]' alt="YouTube" loading="lazy" decoding="async">
           <span class="link-label">YouTube</span>
           <span class="chip">NEW</span>
         </a>
 
         <a class="link" href="https://www.tiktok.com/@ferbrosgarage" target="_blank" rel="noopener noreferrer">
-          <img class="logo" src="assets/logos/tiktok.png" alt="TikTok" loading="lazy">
+          <img class="logo logo-auto" data-candidates='["assets/logos/tiktok.png","TikTok-Logo.png"]' alt="TikTok" loading="lazy" decoding="async">
           <span class="link-label">TikTok</span>
           <span></span>
         </a>
 
         <a class="link" href="https://www.instagram.com/ferbrosgarage/" target="_blank" rel="noopener noreferrer">
-          <img class="logo" src="assets/logos/instagram.png" alt="Instagram" loading="lazy">
+          <img class="logo logo-auto" data-candidates='["assets/logos/instagram.png","Insta%20logo.png","Insta logo.png"]' alt="Instagram" loading="lazy" decoding="async">
           <span class="link-label">Instagram</span>
           <span></span>
         </a>
@@ -237,7 +209,6 @@
     (function(){
       const v = document.getElementById('heroVideo');
       if (!v) return;
-      // Hard enforce inline + muted
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('playsinline','');
@@ -254,14 +225,41 @@
         v.replaceWith(gif);
       };
 
-      // Try immediate play
-      const tryPlay = () => v.play().catch(() => Promise.reject());
-      // Give it a short window; if not playing, fallback
       const timer = setTimeout(swapToGif, 600);
       v.addEventListener('playing', () => clearTimeout(timer), { once:true });
+      setTimeout(() => { v.play().catch(()=>{}); }, 50);
+    })();
 
-      // Some IABs need a slight tick before play()
-      setTimeout(() => { tryPlay().catch(() => {}); }, 50);
+    // Defensive logo loader: try multiple filenames (no spaces -> spaces, png -> svg/webp)
+    (function(){
+      // PFP variants too
+      const pfpCandidates = ["assets/pfp.png","assets/pfp.jpg","assets/pfp.jpeg","FERBROSCREW%20logo%20(1).png","FERBROSCREW logo (1).png"];
+      const pfp = document.getElementById('pfpImg');
+      (function loadPfp(i=0){
+        if (!pfp) return;
+        if (i >= pfpCandidates.length){ pfp.alt=""; return; }
+        const src = pfpCandidates[i];
+        const test = new Image();
+        test.onload = ()=> { pfp.src = src; };
+        test.onerror = ()=> loadPfp(i+1);
+        test.src = src;
+      })();
+
+      document.querySelectorAll('.logo-auto').forEach(img=>{
+        const list = (() => {
+          try { return JSON.parse(img.getAttribute('data-candidates')||"[]"); }
+          catch(e){ return []; }
+        })();
+        const tryLoad = (i=0) => {
+          if (i >= list.length){ img.removeAttribute('src'); img.alt=""; return; }
+          const src = list[i];
+          const test = new Image();
+          test.onload = ()=> { img.src = src; };
+          test.onerror = ()=> tryLoad(i+1);
+          test.src = src;
+        };
+        tryLoad();
+      });
     })();
 
     // Copy Discord invite
