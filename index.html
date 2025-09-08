@@ -32,20 +32,26 @@
 
     /* FULL-BLEED 4:3 HEADER (no rounded corners) */
     .header-bleed{
-      width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+      width:100vw;
+      margin-left:calc(50% - 50vw);
+      margin-right:calc(50% - 50vw);
       background:#111;
-      /* Keep it from being too tall on big monitors */
-      max-height:70vh; /* you can tweak this */
+      max-height:70vh; /* tweak if you want shorter on desktop */
       overflow:hidden;
     }
     .header-media{
-      width:100%; aspect-ratio:4/3; display:block; object-fit:cover;
-      /* If the 70vh cap kicks in, let the video scale to fit height while maintaining 4:3 */
+      width:100%;
+      aspect-ratio:4/3;
+      display:block;
+      object-fit:cover;
       height:auto;
     }
 
     /* In-app browser hint */
-    .browser-hint{position:sticky;top:0;z-index:50;display:none;background:#0d0d0d;border-bottom:1px solid var(--border)}
+    .browser-hint{
+      position:sticky; top:0; z-index:50; display:none;
+      background:#0d0d0d; border-bottom:1px solid var(--border);
+    }
     .hint-inner{display:flex;gap:10px;align-items:center;padding:10px 14px;font-size:14px}
     .hint-dot{width:24px;height:24px;border-radius:999px;background:#121212;display:grid;place-items:center;border:1px solid var(--border)}
     .hint-accent{color:var(--accent);font-weight:700}
@@ -62,7 +68,6 @@
     .title{display:flex;align-items:center;gap:8px;line-height:1}
     .brand-ferbros{
       font-weight:900;font-size:22px;color:#000;
-      /* white outline (fallback via multi-shadow to simulate stroke) */
       text-shadow:
         -1px -1px 0 #fff, 1px -1px 0 #fff,
         -1px  1px 0 #fff, 1px  1px 0 #fff;
@@ -71,9 +76,8 @@
     }
     .brand-crew{
       font-weight:900;font-size:22px;color:#000;background:var(--accent);
-      padding:2px 8px;border-radius:1px; letter-spacing:.8px;
+      padding:2px 8px;border-radius:8px; letter-spacing:.8px;
     }
-
     .subtitle{color:var(--muted);font-size:14px;margin-top:6px}
 
     /* Links list */
@@ -117,25 +121,42 @@
       <div class="hint-dot" aria-hidden="true">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
       </div>
-      Do us both a favor — <span class="hint-accent">open in your browser</span> for the full experience. Tap the <b>three dots</b> → <b>Open in browser</b>.
+      <span class="hint-accent">Heads up:</span>
+      <span id="iabLine">Built for speed, not this in-app browser. Tap the 3 dots → Open in browser.</span>
       <button class="hint-close" id="hintClose" aria-label="Close">Close</button>
     </div>
   </div>
 
   <!-- FULL-BLEED 4:3 HEADER VIDEO -->
   <section class="header-bleed" aria-label="Header">
-    <video class="header-media" autoplay muted loop playsinline poster="assets/header-poster.jpg">
-      <source src="Crwvideofinisj.mp4" type="video/mp4"/>
+    <video
+      id="heroVideo"
+      class="header-media"
+      autoplay
+      muted
+      playsinline
+      webkit-playsinline
+      loop
+      preload="metadata"
+      poster="assets/header-poster.jpg"
+      controlslist="nodownload noplaybackrate noremoteplayback"
+      disablepictureinpicture
+    >
+      <source src="assets/header.mp4" type="video/mp4"/>
       <source src="assets/header.webm" type="video/webm"/>
-      <img src="0908.gif" alt="FerbrosCREW header"/>
+      <!-- Fallback GIF inside video tag for old browsers -->
+      <img src="assets/header.gif" alt="FerbrosCREW header"/>
     </video>
+    <noscript>
+      <img src="assets/header.gif" alt="FerbrosCREW header" class="header-media"/>
+    </noscript>
   </section>
 
   <main class="wrap">
     <!-- Profile / tagline -->
     <section class="card">
       <div class="head">
-        <div class="avatar"><img src="FERBROSCREW logo (1).png" alt="FerbrosCREW avatar"></div>
+        <div class="avatar"><img src="assets/pfp.png" alt="FerbrosCREW avatar"></div>
         <div>
           <div class="title">
             <span class="brand-ferbros">Ferbros</span><span class="brand-crew">CREW</span>
@@ -144,19 +165,17 @@
         </div>
       </div>
 
-      <!-- Links (explicit SRCs) -->
-
+      <!-- Links -->
       <div class="links" role="navigation" aria-label="Main links">
         <a class="link" href="https://2strokeshop.com/aff/37/" target="_blank" rel="noopener noreferrer">
-          <img class="logo" src="2STROKESHOP.COM-512X512-PNG-2.webp" alt="YouTube" loading="lazy">
-          <span class="link-label">Stickers, oil, everything for a 2 stroke rider</span>
+          <img class="logo" src="assets/logos/2strokeshop.webp" alt="2StrokeShop" loading="lazy">
+          <span class="link-label">Stickers, oil, everything for a 2-stroke rider</span>
         </a>
-
 
         <!-- Discord unified block -->
         <div class="block">
           <div class="block-head">
-            <img class="logo" src="Discord-Logo.png" alt="Discord" loading="lazy">
+            <img class="logo" src="assets/logos/discord.png" alt="Discord" loading="lazy">
             <span class="link-label">Discord</span>
             <span class="chip">JOIN</span>
           </div>
@@ -166,27 +185,25 @@
           </div>
         </div>
 
-
-
-      <div class="links" role="navigation" aria-label="Main links">
         <a class="link" href="https://www.youtube.com/@Ferbrosgarage" target="_blank" rel="noopener noreferrer">
-          <img class="logo" src="Youtubelogo.png" alt="YouTube" loading="lazy">
+          <img class="logo" src="assets/logos/youtube.png" alt="YouTube" loading="lazy">
           <span class="link-label">YouTube</span>
           <span class="chip">NEW</span>
         </a>
 
         <a class="link" href="https://www.tiktok.com/@ferbrosgarage" target="_blank" rel="noopener noreferrer">
-          <img class="logo" src="TikTok-Logo.png" alt="TikTok" loading="lazy">
+          <img class="logo" src="assets/logos/tiktok.png" alt="TikTok" loading="lazy">
           <span class="link-label">TikTok</span>
           <span></span>
         </a>
 
-        <a class="link" href="https://www.instagram.com/ferborsgarage/" target="_blank" rel="noopener noreferrer">
-          <img class="logo" src="Insta logo.png" alt="Instagram" loading="lazy">
+        <a class="link" href="https://www.instagram.com/ferbrosgarage/" target="_blank" rel="noopener noreferrer">
+          <img class="logo" src="assets/logos/instagram.png" alt="Instagram" loading="lazy">
           <span class="link-label">Instagram</span>
           <span></span>
         </a>
-
+      </div>
+    </section>
 
     <p class="foot">© <span id="year"></span> FerbrosCREW</p>
   </main>
@@ -195,17 +212,56 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // In-app browser detection → show hint
+    // In-app browser detection → custom hint line
     (function(){
       const ua = navigator.userAgent || navigator.vendor || '';
       const isTikTok = /\bTikTok\b/i.test(ua);
-      const isIG = /\bInstagram\b/i.test(ua);
-      const isFB = /\bFBAN|FBAV|FB_IAB\b/i.test(ua);
+      const isIG    = /\bInstagram\b/i.test(ua);
+      const isFB    = /\bFBAN|FBAV|FB_IAB\b/i.test(ua);
       const isInApp = isTikTok || isIG || isFB;
+
       const hint = document.getElementById('browserHint');
       const close = document.getElementById('hintClose');
-      if (isInApp) hint.style.display = 'block';
+      const line = document.getElementById('iabLine');
+
+      if (isInApp && hint) {
+        if (isTikTok) line.textContent = "Built for speed, not TikTok’s toy browser. Tap the 3 dots → Open in browser.";
+        else if (isIG) line.textContent = "Built for speed, not Instagram’s in-app browser. Tap the 3 dots → Open in browser.";
+        else line.textContent = "Built for speed, not this in-app browser. Tap the 3 dots → Open in browser.";
+        hint.style.display = 'block';
+      }
       close?.addEventListener('click', () => hint.remove());
+    })();
+
+    // Robust autoplay: try to play; if blocked, swap to GIF fallback
+    (function(){
+      const v = document.getElementById('heroVideo');
+      if (!v) return;
+      // Hard enforce inline + muted
+      v.muted = true;
+      v.playsInline = true;
+      v.setAttribute('playsinline','');
+      v.setAttribute('webkit-playsinline','');
+
+      let swapped = false;
+      const swapToGif = () => {
+        if (swapped) return;
+        swapped = true;
+        const gif = document.createElement('img');
+        gif.src = 'assets/header.gif';
+        gif.alt = 'FerbrosCREW header';
+        gif.className = 'header-media';
+        v.replaceWith(gif);
+      };
+
+      // Try immediate play
+      const tryPlay = () => v.play().catch(() => Promise.reject());
+      // Give it a short window; if not playing, fallback
+      const timer = setTimeout(swapToGif, 600);
+      v.addEventListener('playing', () => clearTimeout(timer), { once:true });
+
+      // Some IABs need a slight tick before play()
+      setTimeout(() => { tryPlay().catch(() => {}); }, 50);
     })();
 
     // Copy Discord invite
@@ -213,7 +269,7 @@
       const btn = document.getElementById('copyDiscord');
       if(!btn) return;
       btn.addEventListener('click', async () => {
-        const url = btn.getAttribute('data-clip');
+        const url = btn.getAttribute('data-clip') || 'https://discord.gg/UYXKPbcdNc';
         try{
           await navigator.clipboard.writeText(url);
           const prev = btn.textContent;
