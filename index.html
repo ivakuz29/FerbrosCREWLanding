@@ -140,14 +140,14 @@
       <!-- Links -->
       <div class="links" role="navigation" aria-label="Main links">
         <a class="link" href="https://2strokeshop.com/aff/37/" target="_blank" rel="noopener noreferrer">
-          <img class="logo logo-auto" data-candidates='["Assets/logos/2strokeshop.webp"]' alt="2StrokeShop" loading="lazy" decoding="async">
+          <img class="logo" src="Assets/logos/2strokeshop.webp" alt="2StrokeShop" loading="lazy" decoding="async">
           <span class="link-label">Stickers, oil, everything for a 2-stroke rider</span>
         </a>
 
         <!-- Discord unified block -->
         <div class="block">
           <div class="block-head">
-            <img class="logo logo-auto" data-candidates='["Assets/logos/discord.png","assets/logos/discord.svg","Discord-Logo.png"]' alt="Discord" loading="lazy" decoding="async">
+            <img class="logo" src="Assets/logos/discord.png" alt="Discord" loading="lazy" decoding="async">
             <span class="link-label">Discord</span>
             <span class="chip">JOIN</span>
           </div>
@@ -158,27 +158,24 @@
         </div>
 
         <a class="link" href="https://www.youtube.com/@Ferbrosgarage" target="_blank" rel="noopener noreferrer">
-          <img class="logo logo-auto" data-candidates='["Assets/logos/youtube.png","Youtubelogo.png"]' alt="YouTube" loading="lazy" decoding="async">
+          <img class="logo" src="Assets/logos/youtube.png" alt="YouTube" loading="lazy" decoding="async">
           <span class="link-label">YouTube</span>
           <span class="chip">NEW</span>
         </a>
-
+        
         <a class="link" href="https://www.tiktok.com/@ferbrosgarage" target="_blank" rel="noopener noreferrer">
-          <img class="logo logo-auto" data-candidates='["Assets/logos/tiktok.png","TikTok-Logo.png"]' alt="TikTok" loading="lazy" decoding="async">
+          <img class="logo" src="Assets/logos/tiktok.png" alt="TikTok" loading="lazy" decoding="async">
           <span class="link-label">TikTok</span>
-          <span></span>
         </a>
-
+        
         <a class="link" href="https://www.instagram.com/ferbrosgarage/" target="_blank" rel="noopener noreferrer">
-          <img class="logo logo-auto" data-candidates='["Assets/logos/instagram.png","Insta%20logo.png","Insta logo.png"]' alt="Instagram" loading="lazy" decoding="async">
+          <img class="logo" src="Assets/logos/instagram.png" alt="Instagram" loading="lazy" decoding="async">
           <span class="link-label">Instagram</span>
-          <span></span>
         </a>
-      </div>
-    </section>
-
+  
     <p class="foot">© <span id="year"></span> FerbrosCREW</p>
   </main>
+ 
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -204,12 +201,10 @@
       close?.addEventListener('click', () => hint.remove());
     })();
   
-    // Autoplay with robust fallback to GIF (CAREFUL: uses 'Assets/', not 'assets/')
+    // Robust autoplay: try to play; if blocked, swap to GIF fallback
     (function(){
       const v = document.getElementById('heroVideo');
       if (!v) return;
-  
-      // Enforce inline autoplay
       v.muted = true;
       v.setAttribute('muted','');
       v.playsInline = true;
@@ -221,32 +216,24 @@
         if (swapped) return;
         swapped = true;
         const gif = document.createElement('img');
-        gif.src = 'Assets/header.gif';   // <-- FIXED CASE
+        gif.src = 'Assets/header.gif'; // case-sensitive!
         gif.alt = 'FerbrosCREW header';
         gif.className = 'header-media';
         v.replaceWith(gif);
       };
   
-      // If it never starts, fall back after a bit longer (mobile can be slow)
       const timer = setTimeout(swapToGif, 1500);
-  
-      // Try to play as soon as it can
-      const tryPlay = () => v.play().catch(() => {}); // NotAllowedError -> timer will swap
+      const tryPlay = () => v.play().catch(() => {});
       if (v.readyState >= 2) tryPlay();
       else v.addEventListener('canplay', tryPlay, { once:true });
-  
-      // If it actually starts, cancel fallback
       v.addEventListener('playing', () => clearTimeout(timer), { once:true });
-  
-      // Extra nudge for stubborn in-app browsers
       setTimeout(tryPlay, 100);
     })();
   
-    // Simple direct-image loader (no fancy candidates)
+    // Avatar
     (function(){
-      // Your avatar path is capital-A Assets
       const pfp = document.getElementById('pfpImg');
-      if (pfp) pfp.src = 'Assets/pfp.png';
+      if (pfp) pfp.src = 'Assets/pfp.png'; // case-sensitive path
     })();
   
     // Copy Discord invite
@@ -282,4 +269,3 @@
       });
     })();
   </script>
-  
