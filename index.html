@@ -179,11 +179,10 @@
 
     <p class="foot">© <span id="year"></span> FerbrosCREW</p>
   </main>
-
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-
+  
     // In-app browser detection → custom hint line
     (function(){
       const ua = navigator.userAgent || navigator.vendor || '';
@@ -191,11 +190,11 @@
       const isIG    = /\bInstagram\b/i.test(ua);
       const isFB    = /\bFBAN|FBAV|FB_IAB\b/i.test(ua);
       const isInApp = isTikTok || isIG || isFB;
-
+  
       const hint = document.getElementById('browserHint');
       const close = document.getElementById('hintClose');
       const line = document.getElementById('iabLine');
-
+  
       if (isInApp && hint) {
         if (isTikTok) line.textContent = "Built for speed, not TikTok’s toy browser. Tap the 3 dots → Open in browser.";
         else if (isIG) line.textContent = "Built for speed, not Instagram’s in-app browser. Tap the 3 dots → Open in browser.";
@@ -204,64 +203,52 @@
       }
       close?.addEventListener('click', () => hint.remove());
     })();
-
-    // Robust autoplay: try to play; if blocked, swap to GIF fallback
+  
+    // Autoplay with robust fallback to GIF (CAREFUL: uses 'Assets/', not 'assets/')
     (function(){
       const v = document.getElementById('heroVideo');
       if (!v) return;
+  
+      // Enforce inline autoplay
       v.muted = true;
+      v.setAttribute('muted','');
       v.playsInline = true;
       v.setAttribute('playsinline','');
       v.setAttribute('webkit-playsinline','');
-
+  
       let swapped = false;
       const swapToGif = () => {
         if (swapped) return;
         swapped = true;
         const gif = document.createElement('img');
-        gif.src = 'assets/header.gif';
+        gif.src = 'Assets/header.gif';   // <-- FIXED CASE
         gif.alt = 'FerbrosCREW header';
         gif.className = 'header-media';
         v.replaceWith(gif);
       };
-
-      const timer = setTimeout(swapToGif, 600);
+  
+      // If it never starts, fall back after a bit longer (mobile can be slow)
+      const timer = setTimeout(swapToGif, 1500);
+  
+      // Try to play as soon as it can
+      const tryPlay = () => v.play().catch(() => {}); // NotAllowedError -> timer will swap
+      if (v.readyState >= 2) tryPlay();
+      else v.addEventListener('canplay', tryPlay, { once:true });
+  
+      // If it actually starts, cancel fallback
       v.addEventListener('playing', () => clearTimeout(timer), { once:true });
-      setTimeout(() => { v.play().catch(()=>{}); }, 50);
+  
+      // Extra nudge for stubborn in-app browsers
+      setTimeout(tryPlay, 100);
     })();
-
-    // Defensive logo loader: try multiple filenames (no spaces -> spaces, png -> svg/webp)
+  
+    // Simple direct-image loader (no fancy candidates)
     (function(){
-      // PFP variants too
-      const pfpCandidates = ["Assets/pfp.png"];
+      // Your avatar path is capital-A Assets
       const pfp = document.getElementById('pfpImg');
-      (function loadPfp(i=0){
-        if (!pfp) return;
-        if (i >= pfpCandidates.length){ pfp.alt=""; return; }
-        const src = pfpCandidates[i];
-        const test = new Image();
-        test.onload = ()=> { pfp.src = src; };
-        test.onerror = ()=> loadPfp(i+1);
-        test.src = src;
-      })();
-
-      document.querySelectorAll('.logo-auto').forEach(img=>{
-        const list = (() => {
-          try { return JSON.parse(img.getAttribute('data-candidates')||"[]"); }
-          catch(e){ return []; }
-        })();
-        const tryLoad = (i=0) => {
-          if (i >= list.length){ img.removeAttribute('src'); img.alt=""; return; }
-          const src = list[i];
-          const test = new Image();
-          test.onload = ()=> { img.src = src; };
-          test.onerror = ()=> tryLoad(i+1);
-          test.src = src;
-        };
-        tryLoad();
-      });
+      if (pfp) pfp.src = 'Assets/pfp.png';
     })();
-
+  
     // Copy Discord invite
     (function(){
       const btn = document.getElementById('copyDiscord');
@@ -278,7 +265,7 @@
         }
       });
     })();
-
+  
     // Optional: UTM propagation
     (function(){
       const params = new URLSearchParams(window.location.search);
@@ -295,5 +282,4 @@
       });
     })();
   </script>
-</body>
-</html>
+  
